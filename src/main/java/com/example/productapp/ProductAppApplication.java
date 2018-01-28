@@ -39,13 +39,6 @@ public class ProductAppApplication {
 @Controller
 class ProductController {
 
-/*    @GetMapping(path = "/products")
-    public String getProducts(Model model) {
-        model.addAttribute("products", Arrays.asList("iPad", "iPhone", "iPod"));
-        return "products";
-    }*/
-
-    // Using SpringBootSecurity
     @GetMapping(path = "/products")
     public  String getProducts(Principal principal, Model model) {
         model.addAttribute("principal", principal);

@@ -17,8 +17,7 @@ mvn clean spring-boot:run
 
 ## Importing the realm
 
-If you don't want to create and configure the initial Keycloak Realm manually, you can just import it through the Keycloak Web Console. Import the [springdemo.json](springdemo.json) which is located at the root of this repo.
-
+If you don't want to create and configure the initial Keycloak Realm manually, you can just import it through the Keycloak Web Console. Import the [springbootdemo.json](springbootdemo.json) which is located at the root of this repo.
 
 # Part 1 - Create a Spring Boot app and add Keycloak support
 
@@ -31,6 +30,19 @@ This is on the [Spring Security branch](https://github.com/sebastienblanc/spring
 # Part 3 - Splitting the monolith and secure microservices
 
 TODO
+
+## Exporting An Existing Realm
+
+[Product Documentation - Export](https://access.redhat.com/documentation/en-us/red_hat_jboss_middleware_for_openshift/3/html-single/red_hat_jboss_sso_for_openshift/index#sso-export-the-database)
+
+```
+oc scale --replicas=1 dc sso
+oc env dc/sso -e "JAVA_OPTS_APPEND=-Dkeycloak.migration.action=export -Dkeycloak.migration.provider=singleFile -Dkeycloak.migration.realmName=SpringBootDemo -Dkeycloak.migration.usersExportStrategy=REALM_FILE -Dkeycloak.migration.file=/tmp/springbootdemo-realm.json"
+oc scale --replicas=1 dc sso
+oc rsync sso-2-29kqz:/tmp/springbootdemo-realm.json .
+```
+
+
 
 ## Resources
 
