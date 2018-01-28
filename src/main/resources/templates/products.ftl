@@ -1,6 +1,6 @@
 <#import "/spring.ftl" as spring>
 <html>
-<h1>My products</h1>
+<h1>Hi ${principal.getName()}</h1>
 <ul>
 <#list products as product>
     <li>${product}</li>
